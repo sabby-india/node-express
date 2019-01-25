@@ -2,7 +2,10 @@ const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');//body of the incoming request is parsed and included in the body object of the request
+
 const dishRouter = require('./routes/dishRouter');
+const promoRouter = require('./routes/promoRouter');
+const leaderRouter = require('./routes/leaderRouter');
 
 const hostname = "localhost";
 const port = 3000;
@@ -14,6 +17,13 @@ app.use(bodyParser.json());
 
 //any req coming through the /dishes end point, will be redirected to the dishRouter route
 app.use('/dishes', dishRouter);
+app.use('/dishes/dishId', dishRouter);
+
+app.use('/promotions',promoRouter);
+app.use('/promotions/promoId',promoRouter);
+
+app.use('/leaders',leaderRouter);
+app.use('/leaders/:leaderId',leaderRouter);
 
 app.use(express.static(__dirname + '/public'));
 
